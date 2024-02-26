@@ -1,6 +1,6 @@
 import Protected from "./Protected";
 import fakeAuth from "./fakeAuth";
-import { Route, Navigate } from "react-router-dom";
+import { Route, Navigate, useNavigate } from "react-router-dom";
 
 // function PrivateRoute({ component: Component, ...rest }) {
 //   return (
@@ -21,19 +21,11 @@ import { Route, Navigate } from "react-router-dom";
 //   );
 // }
 
-function PrivateRoute({ element: Element, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      element={
-        fakeAuth.isAuthenticated === true ? (
-          <Protected />
-        ) : (
-          <Navigate to="/login" state={{ from: rest.location }} replace />
-        )
-      }
-    />
-  );
+function PrivateRoute(props) {
+  const from = props
+  const navigate = useNavigate();
+  // navigate("/login", { state:from })
+  return <Navigate to="/login" state={from} replace />;
 }
 
 export default PrivateRoute;

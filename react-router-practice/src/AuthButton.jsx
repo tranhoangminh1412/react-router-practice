@@ -1,17 +1,18 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import fakeAuth from "./fakeAuth";
 
-const AuthButton = () => {
+const AuthButton = (props) => {
+  const {isAuthenticated, setAuthenticate} = props
   const navigate = useNavigate();
 
-  return fakeAuth.isAuthenticated ? (
+  return isAuthenticated ? (
     <p>
       Welcome!{" "}
       <button
         onClick={() => {
-          fakeAuth.isAuthenticated = false;
+          setAuthenticate(false);
           console.log(
-            "authButton authenticate check: " + fakeAuth.isAuthenticated
+            "authButton authenticate check: " + isAuthenticated
           );
           console.log("what the fuck");
           navigate("/");

@@ -1,22 +1,21 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import fakeAuth from "./fakeAuth";
 
 function Login(props) {
-  const {redirectToReferrer,setRedirectToReferrer} = props
-  const { from } = props.state || { from: { pathname: '/' } }
-
+  const { redirectToReferrer, setRedirectToReferrer, setAuthenticate } = props;
+  const location = useLocation();
+  const { from } = location.state || { from: "/" };
+  const navigate = useNavigate();
+  console.log(from);
 
   const login = () => {
-    fakeAuth.authenticate(() => {
-      setRedirectToReferrer(true);
-    });
+    console.log("from: " + props.state);
+    setRedirectToReferrer(true);
+    setAuthenticate(true);
+    navigate(from);
   };
-
-  if (redirectToReferrer) {
-    console.log("REDIRECTTOREFERRER")
-    return <Navigate to={from} />;
-  }
 
   return (
     <div>

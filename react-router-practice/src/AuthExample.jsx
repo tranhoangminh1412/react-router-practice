@@ -11,26 +11,25 @@ import Protected from "./Protected";
 import { useState } from "react";
 import AuthButton from "./AuthButton";
 import PrivateRoute from "./PrivateRoute";
-import fakeAuth from "./fakeAuth";
-import { Navigate } from "react-router-dom";
 import Home from "./Home";
 
 export default function AuthExample() {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+  const [isAuthenticated,setAuthenticate] = useState(false)
 
   return (
     <>
       <Router>
         <div>
-          <AuthButton />
+          <AuthButton isAuthenticated={isAuthenticated} setAuthenticate={setAuthenticate} />
           <ul>
             <li>
               <Link to="/public">Public Page</Link>
             </li>
             <li>
               <Link
-                onClick={console.log(
-                  "Protected Link onclick: " + fakeAuth.isAuthenticated
+                onClick={() => console.log(
+                  "Protected Link onclick: " + isAuthenticated
                 )}
                 to="/protected"
               >
@@ -47,20 +46,18 @@ export default function AuthExample() {
                   <Login
                     redirectToReferrer={redirectToReferrer}
                     setRedirectToReferrer={setRedirectToReferrer}
+                    isAuthenticated={isAuthenticated}
+                    setAuthenticate={setAuthenticate}
                   />
                 }
               />
               <Route
                 path="/protected"
                 element={
-                  fakeAuth.isAuthenticated ? (
+                  isAuthenticated ? (
                     <Protected />
                   ) : (
-                    <Navigate
-                      to="/login"
-                      state={{ from: location.pathname }}
-                      replace={true}
-                    />
+                    <PrivateRoute from={"/protected"} />
                   )
                 }
               />
