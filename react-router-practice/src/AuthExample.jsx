@@ -54,11 +54,6 @@ export default function AuthExample() {
               <Route
                 path="/protected"
                 element={
-                  // isAuthenticated ? (
-                  //   <Protected isAuthenticated={isAuthenticated} />
-                  // ) : (
-                  //   <PrivateRoute from={"/protected"} />
-                  // )
                   <Protected isAuthenticated={isAuthenticated} />
                 }
               />

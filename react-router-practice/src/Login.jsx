@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Login(props) {
-  const { redirectToReferrer, setRedirectToReferrer, setAuthenticate } = props;
+  const { setRedirectToReferrer, setAuthenticate } = props;
   const location = useLocation();
   const navigate = useNavigate();
   const {state} = location

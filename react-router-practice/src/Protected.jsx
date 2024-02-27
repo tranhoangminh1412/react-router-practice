@@ -1,8 +1,6 @@
-import { Outlet, useNavigate, redirect, Navigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
 function Protected(props) {
-  let navigate = useNavigate();
   const { isAuthenticated } = props;
 
   if (isAuthenticated) {
@@ -17,8 +15,6 @@ function Protected(props) {
     return(
       <Navigate to={'/login'} state={{from: '/protected'}} replace />
     )
-    // redirect("/login", {state: {from: "/protected"}})
-    navigate('/login', { state: { from: '/protected' } });
   }
 }
 
