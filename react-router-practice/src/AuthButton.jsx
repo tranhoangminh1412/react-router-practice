@@ -1,5 +1,4 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import fakeAuth from "./fakeAuth";
 
 const AuthButton = (props) => {
   const {isAuthenticated, setAuthenticate} = props

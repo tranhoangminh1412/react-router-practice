@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import fakeAuth from "./fakeAuth";
 
 function Login(props) {
   const { redirectToReferrer, setRedirectToReferrer, setAuthenticate } = props;
   const location = useLocation();
-  const { from } = location.state || { from: "/" };
   const navigate = useNavigate();
+  const {state} = location
+  const from = state ? state.from : '/';
   console.log(from);
 
   const login = () => {
